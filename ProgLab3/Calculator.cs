@@ -16,7 +16,14 @@ namespace ProgLab3
             {
                 if (ch == ')')
                 {
-                    
+                    string subexpression = "";
+                    while (expessionChars.Peek() != '(')
+                    {
+                        subexpression += expessionChars.Pop();
+                    }
+                    if(subexpression[subexpression.Length - 1] == '-')
+                    subexpression = new string(subexpression.Reverse().ToArray());
+                    Console.WriteLine(expression);
                 }
                 else expessionChars.Push(ch);
             }
