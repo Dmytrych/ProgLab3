@@ -20,7 +20,11 @@ namespace ProgLab3
                 }
                 else expessionChars.Push(ch);
             }
+            return StringCount(expression);
         }
-
+        private static double StringCount(string subexpression)
+        {
+            return 1;
+        }
     }
 }
