@@ -23,6 +23,10 @@ namespace ProgLab3
                     }
                     if(subexpression[subexpression.Length - 1] == '-')
                     subexpression = new string(subexpression.Reverse().ToArray());
+                    expression = expression.Replace("(" + subexpression + ")", Convert.ToString(StringCount(subexpression)));
+                    double subValue = StringCount(subexpression);
+                    expression = subValue > 0 ? expression.Replace("(" + subexpression + ")", Convert.ToString(subValue))
+                        : expression.Replace(subexpression, Convert.ToString(subValue));
                     Console.WriteLine(expression);
                 }
                 else expessionChars.Push(ch);
