@@ -21,7 +21,6 @@ namespace ProgLab3
                     {
                         subexpression += expessionChars.Pop();
                     }
-                    if(subexpression[subexpression.Length - 1] == '-')
                     subexpression = new string(subexpression.Reverse().ToArray());
                     expression = expression.Replace("(" + subexpression + ")", Convert.ToString(StringCount(subexpression)));
                     double subValue = StringCount(subexpression);
