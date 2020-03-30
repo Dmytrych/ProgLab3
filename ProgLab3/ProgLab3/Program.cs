@@ -7,10 +7,10 @@ namespace ProgLab3
     {
         static void Main(string[] args)
         {
-            string input = Console.ReadLine();
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine(CreatePostfixNotation(input));
+            string input = Console.ReadLine();
         }
 
         static string CreatePostfixNotation(string input)
