@@ -7,8 +7,20 @@ namespace ProgLab3
     {
         static void Main(string[] args)
         {
-            Stack<int> stack = new Stack<int>();
-            stack.Peek();
+            int[] arr = { 1, 2, 3, 4, 5, 6, 7 };
+            MyStack<int> stack = new MyStack<int>();
+            foreach (int i in arr)
+                stack.Push(i);
+            Console.WriteLine(stack.Pop());
+            Console.WriteLine(stack.Pop());
+            Console.WriteLine(stack.Pop());
+            Console.WriteLine(stack.Pop());
+            Console.WriteLine(stack.Pop());
+            Console.WriteLine(stack.Pop());
+            Console.WriteLine(stack.Pop());
+            stack.Push(3);
+            Console.WriteLine(stack.Pop());
+            Console.ReadLine();
         }
     }
 }
