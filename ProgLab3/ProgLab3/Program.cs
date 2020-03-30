@@ -7,10 +7,12 @@ namespace ProgLab3
     {
         static void Main(string[] args)
         {
+            string input = Console.ReadLine();
+
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine(CreatePostfixNotation(input));
-            string input = Console.ReadLine();
+
         }
 
         static string CreatePostfixNotation(string input)
@@ -94,7 +96,7 @@ namespace ProgLab3
                         stack.Pop();
                         break;
                     default:
-                        result += tokens[i].ToString();
+                        result += tokens[i].ToString() + " ";
                         break;
                 }
             }
@@ -105,6 +107,11 @@ namespace ProgLab3
             return result;
         }
 
-   
+        static int Calculate(string input)
+        {
+            int arg1 = 0, arg2;
+            string[] tokensAndOperators = input.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            return arg1;
+        }
     }
 }
