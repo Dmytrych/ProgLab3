@@ -1,22 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ProgLab3
 {
     class MyStack<T>
     {
-        T[] elements;
+        Node<T> Top;
         public int Length { get; private set; }
-        public MyStack(int length)
+        public MyStack()
         {
-            elements = new T[length];
             Length = 0;
         }
-        public void Push(T elem)
+        public void Push(T value)
         {
-            elements[Length] = elem;
+            if (Length == 0)
+                Top = new Node<T>(null, value);
+            else
+                Top = new Node<T>(Top, value);
             Length++;
+        }
+        public T Peek()
+        {
+            return Top.Value;
+        }
+        public T Pop()
+        {
+            T value = Top.Value;
+            Top = Top.LastElem;
+            return value;
         }
     }
 }
