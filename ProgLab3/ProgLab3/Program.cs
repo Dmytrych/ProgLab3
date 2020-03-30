@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ProgLab3
 {
@@ -6,7 +7,8 @@ namespace ProgLab3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Stack<int> stack = new Stack<int>();
+            stack.Peek();
         }
     }
 }
