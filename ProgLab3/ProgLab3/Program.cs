@@ -7,7 +7,7 @@ namespace ProgLab3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(CreatePostfixNotation(args[0]));
+            Console.WriteLine(Calculate(CreatePostfixNotation(Console.ReadLine())));
         }
 
         static string CreatePostfixNotation(string input)
@@ -26,7 +26,10 @@ namespace ProgLab3
                         {
                             if (stack.Peek() == '/' || stack.Peek() == '*')
                             {
+                                result += " ";
                                 result += stack.Pop().ToString();
+                                result += " ";
+
                             }
                             else
                             {
@@ -41,7 +44,9 @@ namespace ProgLab3
                         {
                             if(stack.Peek() == '/' || stack.Peek() == '*')
                             {
+                                result += " ";
                                 result += stack.Pop().ToString();
+                                result += " ";
                             }
                             else
                             {
@@ -56,7 +61,9 @@ namespace ProgLab3
                         {
                             if (stack.Peek() == '/' || stack.Peek() == '*' || stack.Peek() == '-' || stack.Peek() == '+')
                             {
+                                result += " ";
                                 result += stack.Pop().ToString();
+                                result += " ";
                             }
                             else
                             {
@@ -71,7 +78,9 @@ namespace ProgLab3
                         {
                             if (stack.Peek() == '/' || stack.Peek() == '*' || stack.Peek() == '-' || stack.Peek() == '+')
                             {
+                                result += " ";
                                 result += stack.Pop().ToString();
+                                result += " ";
                             }
                             else
                             {
@@ -86,17 +95,19 @@ namespace ProgLab3
                     case ')':
                         while (stack.Peek() != '(')
                         {
+                            result += " ";
                             result += stack.Pop().ToString();
                         }
                         stack.Pop();
                         break;
                     default:
-                        result += tokens[i].ToString() + " ";
+                        result += tokens[i].ToString();
                         break;
                 }
             }
             while (stack.Count > 0)
             {
+                result += " ";
                 result += stack.Pop().ToString();
             }
             return result;
@@ -104,9 +115,107 @@ namespace ProgLab3
 
         static int Calculate(string input)
         {
-            int arg1 = 0, arg2;
+            int temp;
             string[] tokensAndOperators = input.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            return arg1;
+            string[] newArray;
+            for (int i = 0; i < tokensAndOperators.Length; i++)
+            {
+                switch (tokensAndOperators[i])
+                {
+                    case "+":
+                    temp = Convert.ToInt32(tokensAndOperators[i - 2]) + Convert.ToInt32(tokensAndOperators[i - 1]);
+                    if (tokensAndOperators.Length > 2)
+                    {
+                        newArray = new string[tokensAndOperators.Length - 2];
+                    }
+                    else
+                    {
+                        return Convert.ToInt32(tokensAndOperators[0]);
+                    }
+                    for (int j = 0; j < i-2; j++)
+                    {
+                        newArray[j] = tokensAndOperators[j];
+                    }
+                    newArray[i - 2] = temp.ToString();
+                    for (int j = i-1; j < newArray.Length; j++)
+                    {
+                        newArray[j] = tokensAndOperators[j + 2];
+                    }
+                    tokensAndOperators = newArray;
+                    i = -1;
+                        break;
+
+                    case "-":
+                        temp = Convert.ToInt32(tokensAndOperators[i - 2]) - Convert.ToInt32(tokensAndOperators[i - 1]);
+                        if (tokensAndOperators.Length > 2)
+                        {
+                            newArray = new string[tokensAndOperators.Length - 2];
+                        }
+                        else
+                        {
+                            return Convert.ToInt32(tokensAndOperators[0]);
+                        }
+                        for (int j = 0; j < i - 2; j++)
+                        {
+                            newArray[j] = tokensAndOperators[j];
+                        }
+                        newArray[i - 2] = temp.ToString();
+                        for (int j = i - 1; j < newArray.Length; j++)
+                        {
+                            newArray[j] = tokensAndOperators[j+2];
+                        }
+                        tokensAndOperators = newArray;
+                        i = -1;
+                        break;
+
+                    case "/":
+                        temp = Convert.ToInt32(tokensAndOperators[i - 2]) / Convert.ToInt32(tokensAndOperators[i - 1]);
+                        if (tokensAndOperators.Length > 2)
+                        {
+                            newArray = new string[tokensAndOperators.Length - 2];
+                        }
+                        else
+                        {
+                            return Convert.ToInt32(tokensAndOperators[0]);
+                        }
+                        for (int j = 0; j < i - 2; j++)
+                        {
+                            newArray[j] = tokensAndOperators[j];
+                        }
+                        newArray[i - 2] = temp.ToString();
+                        for (int j = i - 1; j < newArray.Length; j++)
+                        {
+                            newArray[j] = tokensAndOperators[j + 2];
+                        }
+                        tokensAndOperators = newArray;
+                        i = -1;
+                        break;
+
+                    case "*":
+                        temp = Convert.ToInt32(tokensAndOperators[i - 2]) * Convert.ToInt32(tokensAndOperators[i - 1]);
+                        if (tokensAndOperators.Length > 2)
+                        {
+                            newArray = new string[tokensAndOperators.Length - 2];
+                        }
+                        else
+                        {
+                            return Convert.ToInt32(tokensAndOperators[0]);
+                        }
+                        for (int j = 0; j < i - 2; j++)
+                        {
+                            newArray[j] = tokensAndOperators[j];
+                        }
+                        newArray[i - 2] = temp.ToString();
+                        for (int j = i - 1; j < newArray.Length; j++)
+                        {
+                            newArray[j] = tokensAndOperators[j+2];
+                        }
+                        tokensAndOperators = newArray;
+                        i = -1;
+                        break;
+                }
+            }
+            return Convert.ToInt32(tokensAndOperators[0]);
         }
     }
 }
