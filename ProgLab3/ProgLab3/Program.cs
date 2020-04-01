@@ -12,10 +12,11 @@ namespace ProgLab3
 
         static string CreatePostfixNotation(string input)
         {
-            Stack<char> stack = new Stack<char>();
+            MyStack<char> stack = new MyStack<char>();
             string result="";
             input = input.Replace(" ", "");
             char[] tokens = input.ToCharArray();
+            bool nextIsNegative = false;
             for (int i = 0; i < tokens.Length; i++)
             {
                 switch (tokens[i])
@@ -56,21 +57,30 @@ namespace ProgLab3
                         stack.Push(tokens[i]);
                         break;
                     case '-':
-                        result += " ";
-                        while (stack.Count > 0)
+                        if (tokens[i - 1] == '(')
                         {
-                            if (stack.Peek() == '/' || stack.Peek() == '*' || stack.Peek() == '-' || stack.Peek() == '+')
-                            {
-                                result += " ";
-                                result += stack.Pop().ToString();
-                                result += " ";
-                            }
-                            else
-                            {
-                                break;
-                            }
+                            nextIsNegative = true;
                         }
-                        stack.Push(tokens[i]);
+                        else
+                        {
+                            nextIsNegative = false;
+                            result += " ";
+                            while (stack.Count > 0)
+                            {
+                                if (stack.Peek() == '/' || stack.Peek() == '*' || stack.Peek() == '-' || stack.Peek() == '+')
+                                {
+                                    result += " ";
+                                    result += stack.Pop().ToString();
+                                    result += " ";
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+
+                            stack.Push(tokens[i]);
+                        }
                         break;
                     case '+':
                         result += " ";
@@ -101,6 +111,12 @@ namespace ProgLab3
                         stack.Pop();
                         break;
                     default:
+                        if (nextIsNegative)
+                        {
+                            result += "-";
+                            nextIsNegative = false;
+
+                        }
                         result += tokens[i].ToString();
                         break;
                 }
