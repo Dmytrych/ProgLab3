@@ -30,7 +30,6 @@ namespace ProgLab3
                                 result += " ";
                                 result += stack.Pop().ToString();
                                 result += " ";
-
                             }
                             else
                             {
@@ -78,7 +77,6 @@ namespace ProgLab3
                                     break;
                                 }
                             }
-
                             stack.Push(tokens[i]);
                         }
                         break;
@@ -133,7 +131,7 @@ namespace ProgLab3
             int temp;
             string[] tokensAndOperators = input.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             string[] newArray;
-            for (int i = 0; i < tokensAndOperators.Length; i++)
+            for (int i = 1; i < tokensAndOperators.Length; i++)
             {
                 switch (tokensAndOperators[i])
                 {
