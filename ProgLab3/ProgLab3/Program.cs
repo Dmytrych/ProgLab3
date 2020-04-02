@@ -7,7 +7,7 @@ namespace ProgLab3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Calculate(CreatePostfixNotation(Console.ReadLine())));
+            Console.WriteLine(Calculate(CreatePostfixNotation(args[0])));
         }
 
         static string CreatePostfixNotation(string input)
@@ -115,7 +115,6 @@ namespace ProgLab3
                         {
                             result += "-";
                             nextIsNegative = false;
-
                         }
                         result += tokens[i].ToString();
                         break;
