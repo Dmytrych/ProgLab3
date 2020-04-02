@@ -224,7 +224,7 @@ namespace ProgLab3
                             newArray[j] = tokensAndOperators[j+2];
                         }
                         tokensAndOperators = newArray;
-                        i = -1;
+                        i = 1;
                         break;
                 }
             }
