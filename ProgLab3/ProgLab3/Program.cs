@@ -83,7 +83,7 @@ namespace ProgLab3
                         result += " ";
                         while (stack.Count > 0)
                         {
-                            if (stack.Peek() == 'V' || stack.Peek() == '!')
+                            if ( stack.Peek() == '!')
                             {
                                 result += " ";
                                 result += stack.Pop().ToString();
@@ -196,7 +196,7 @@ namespace ProgLab3
                             newArray[j] = tokensAndOperators[j + 1];
                         }
                         tokensAndOperators = newArray;
-                        i = 1;
+                        i = -1;
                         break;
                         break;
                     case "+":
@@ -219,7 +219,7 @@ namespace ProgLab3
                         newArray[j] = tokensAndOperators[j + 2];
                     }
                     tokensAndOperators = newArray;
-                    i = 1;
+                    i = -1;
                         break;
 
                     case "-":
@@ -288,7 +288,7 @@ namespace ProgLab3
                             newArray[j] = tokensAndOperators[j+2];
                         }
                         tokensAndOperators = newArray;
-                        i = 1;
+                        i = -1;
                         break;
                     case "V":
                         temp = Convert.ToInt32(Math.Sqrt(Convert.ToInt32(tokensAndOperators[i - 1])));
@@ -310,7 +310,7 @@ namespace ProgLab3
                             newArray[j] = tokensAndOperators[j + 1];
                         }
                         tokensAndOperators = newArray;
-                        i = 1;
+                        i = -1;
                         break;
 
                 }
