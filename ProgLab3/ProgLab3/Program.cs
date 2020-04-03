@@ -7,7 +7,7 @@ namespace ProgLab3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Calculate(CreatePostfixNotation(args[0])));
+            Console.WriteLine(Calculate(CreatePostfixNotation(Console.ReadLine())));
         }
 
         static string CreatePostfixNotation(string input)
@@ -25,7 +25,7 @@ namespace ProgLab3
                         result += " ";
                         while (stack.Count > 0)
                         {
-                            if (stack.Peek() == '/' || stack.Peek() == '*')
+                            if (stack.Peek() == 'V' || stack.Peek() == '/' || stack.Peek() == '*')
                             {
                                 result += " ";
                                 result += stack.Pop().ToString();
@@ -42,7 +42,25 @@ namespace ProgLab3
                         result += " ";
                         while (stack.Count > 0)
                         {
-                            if(stack.Peek() == '/' || stack.Peek() == '*')
+                            if(stack.Peek() == 'V' || stack.Peek() == '/' || stack.Peek() == '*')
+                            {
+                                result += " ";
+                                result += stack.Pop().ToString();
+                                result += " ";
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        stack.Push(tokens[i]);
+                        break;
+                        //sdfsdfsdfsdfsdfsdfsdfdsfdsfdssssssssssssssssssssssssssssssss
+                    case 'V':
+                        result += " ";
+                        while (stack.Count > 0)
+                        {
+                            if (stack.Peek() == 'V' || stack.Peek() == '!')
                             {
                                 result += " ";
                                 result += stack.Pop().ToString();
@@ -66,7 +84,7 @@ namespace ProgLab3
                             result += " ";
                             while (stack.Count > 0)
                             {
-                                if (stack.Peek() == '/' || stack.Peek() == '*' || stack.Peek() == '-' || stack.Peek() == '+')
+                                if (stack.Peek() == 'V' || stack.Peek() == '/' || stack.Peek() == '*' || stack.Peek() == '-' || stack.Peek() == '+')
                                 {
                                     result += " ";
                                     result += stack.Pop().ToString();
@@ -84,7 +102,7 @@ namespace ProgLab3
                         result += " ";
                         while (stack.Count > 0)
                         {
-                            if (stack.Peek() == '/' || stack.Peek() == '*' || stack.Peek() == '-' || stack.Peek() == '+')
+                            if (stack.Peek() == 'V' || stack.Peek() == '/' || stack.Peek() == '*' || stack.Peek() == '-' || stack.Peek() == '+')
                             {
                                 result += " ";
                                 result += stack.Pop().ToString();
@@ -226,6 +244,30 @@ namespace ProgLab3
                         tokensAndOperators = newArray;
                         i = 1;
                         break;
+                        //asdasdasdasdasdasdasdasdsadasdasd
+                    case "V":
+                        temp = Convert.ToInt32(Math.Sqrt(Convert.ToInt32(tokensAndOperators[i - 1])));
+                        if (tokensAndOperators.Length > 1)
+                        {
+                            newArray = new string[tokensAndOperators.Length - 1];
+                        }
+                        else
+                        {
+                            return Convert.ToInt32(tokensAndOperators[0]);
+                        }
+                        for (int j = 0; j < i - 1; j++)
+                        {
+                            newArray[j] = tokensAndOperators[j];
+                        }
+                        newArray[i - 1] = temp.ToString();
+                        for (int j = i; j < newArray.Length; j++)
+                        {
+                            newArray[j] = tokensAndOperators[j + 1];
+                        }
+                        tokensAndOperators = newArray;
+                        i = 1;
+                        break;
+
                 }
             }
             return Convert.ToInt32(tokensAndOperators[0]);
