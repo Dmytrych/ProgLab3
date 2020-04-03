@@ -9,7 +9,14 @@ namespace ProgLab3
         {
             Console.WriteLine(Calculate(CreatePostfixNotation(Console.ReadLine())));
         }
-
+        static int Fact(int x)
+        {
+            for (int i = x-1; i != 1; i--)
+            {
+                x *= i;
+            }
+            return x;
+        }
         static string CreatePostfixNotation(string input)
         {
             MyStack<char> stack = new MyStack<char>();
@@ -21,11 +28,28 @@ namespace ProgLab3
             {
                 switch (tokens[i])
                 {
+                    case '!':
+                        result += " ";
+                        while (stack.Count > 0)
+                        {
+                            if (stack.Peek() == '!')
+                            {
+                                result += " ";
+                                result += stack.Pop().ToString();
+                                result += " ";
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        stack.Push(tokens[i]);
+                        break;
                     case '/':
                         result += " ";
                         while (stack.Count > 0)
                         {
-                            if (stack.Peek() == 'V' || stack.Peek() == '/' || stack.Peek() == '*')
+                            if (stack.Peek() == 'V' || stack.Peek() == '/' || stack.Peek() == '*'|| stack.Peek() == '!')
                             {
                                 result += " ";
                                 result += stack.Pop().ToString();
@@ -42,7 +66,7 @@ namespace ProgLab3
                         result += " ";
                         while (stack.Count > 0)
                         {
-                            if(stack.Peek() == 'V' || stack.Peek() == '/' || stack.Peek() == '*')
+                            if(stack.Peek() == 'V' || stack.Peek() == '/' || stack.Peek() == '*'||stack.Peek()=='!')
                             {
                                 result += " ";
                                 result += stack.Pop().ToString();
@@ -55,7 +79,6 @@ namespace ProgLab3
                         }
                         stack.Push(tokens[i]);
                         break;
-                        //sdfsdfsdfsdfsdfsdfsdfdsfdsfdssssssssssssssssssssssssssssssss
                     case 'V':
                         result += " ";
                         while (stack.Count > 0)
@@ -84,7 +107,7 @@ namespace ProgLab3
                             result += " ";
                             while (stack.Count > 0)
                             {
-                                if (stack.Peek() == 'V' || stack.Peek() == '/' || stack.Peek() == '*' || stack.Peek() == '-' || stack.Peek() == '+')
+                                if (stack.Peek() == 'V' || stack.Peek() == '/' || stack.Peek() == '*' || stack.Peek() == '-' || stack.Peek() == '+'||stack.Peek()=='!')
                                 {
                                     result += " ";
                                     result += stack.Pop().ToString();
@@ -102,7 +125,7 @@ namespace ProgLab3
                         result += " ";
                         while (stack.Count > 0)
                         {
-                            if (stack.Peek() == 'V' || stack.Peek() == '/' || stack.Peek() == '*' || stack.Peek() == '-' || stack.Peek() == '+')
+                            if (stack.Peek() == 'V' || stack.Peek() == '/' || stack.Peek() == '*' || stack.Peek() == '-' || stack.Peek() == '+' || stack.Peek() == '!')
                             {
                                 result += " ";
                                 result += stack.Pop().ToString();
@@ -153,6 +176,29 @@ namespace ProgLab3
             {
                 switch (tokensAndOperators[i])
                 {
+                    case "!":
+                        temp = Fact(Convert.ToInt32(tokensAndOperators[i - 1]));
+                        if (tokensAndOperators.Length > 1)
+                        {
+                            newArray = new string[tokensAndOperators.Length - 1];
+                        }
+                        else
+                        {
+                            return Convert.ToInt32(tokensAndOperators[0]);
+                        }
+                        for (int j = 0; j < i - 1; j++)
+                        {
+                            newArray[j] = tokensAndOperators[j];
+                        }
+                        newArray[i - 1] = temp.ToString();
+                        for (int j = i; j < newArray.Length; j++)
+                        {
+                            newArray[j] = tokensAndOperators[j + 1];
+                        }
+                        tokensAndOperators = newArray;
+                        i = 1;
+                        break;
+                        break;
                     case "+":
                     temp = Convert.ToInt32(tokensAndOperators[i - 2]) + Convert.ToInt32(tokensAndOperators[i - 1]);
                     if (tokensAndOperators.Length > 2)
@@ -173,7 +219,7 @@ namespace ProgLab3
                         newArray[j] = tokensAndOperators[j + 2];
                     }
                     tokensAndOperators = newArray;
-                    i = -1;
+                    i = 1;
                         break;
 
                     case "-":
@@ -244,7 +290,6 @@ namespace ProgLab3
                         tokensAndOperators = newArray;
                         i = 1;
                         break;
-                        //asdasdasdasdasdasdasdasdsadasdasd
                     case "V":
                         temp = Convert.ToInt32(Math.Sqrt(Convert.ToInt32(tokensAndOperators[i - 1])));
                         if (tokensAndOperators.Length > 1)
